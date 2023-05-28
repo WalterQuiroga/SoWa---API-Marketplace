@@ -54,4 +54,4 @@ class ProductoView(APIView):
             return Response({"msg": "No se envio id del producto a eliminar"},
                             status = status.HTTP_400_BAD_REQUEST
             )
-        return Response({"msg": f"Producto con  la ID {pk}  fue eliminado"})
+        return Response({"msg": f"Producto con  la ID {pk} fue eliminado"})
