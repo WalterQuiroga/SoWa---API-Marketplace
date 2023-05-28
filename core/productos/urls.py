@@ -7,5 +7,6 @@ urlpatterns = [
     
     
     path('', ProductoView.as_view(), name='producto'),
+    path('<int:pk>', ProductoView.as_view(), name='un_producto'),
         
     ]

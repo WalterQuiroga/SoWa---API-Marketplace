@@ -35,3 +35,23 @@ class ProductoView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, pk = None):
+        producto = get_object_or_404(Producto, pk=pk)
+        serializer = ProductoSerializer(producto, data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        
+
+    def delete(self, request, pk = None):
+        if pk:
+            producto = get_object_or_404(Producto, pk=pk)
+            producto.delete()
+        else:
+            return Response({"msg": "No se envio id del producto a eliminar"},
+                            status = status.HTTP_400_BAD_REQUEST
+            )
+        return Response({"msg": f"Producto con  la ID {pk}  fue eliminado"})
